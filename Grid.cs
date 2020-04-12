@@ -8,7 +8,7 @@ namespace Assignment1
     {
         public int Rows { get; }
         public int Columns { get; }
-        private List<List<Cell>> Cells { get; }
+        public List<List<Cell>> Cells { get; }
 
         public Grid(int cols, int rows)
         {          
@@ -31,8 +31,39 @@ namespace Assignment1
 
         public Cell GetCell(int row, int col)
         {
+
+
             return Cells[row][col];
         }
+
+        public int[] GetAgent()
+        {
+            int[] AgentCoords = new int[2];
+
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (GetCell(j,i).CellState == Cell.State.Agent)
+                    {
+                        AgentCoords[0] = j;
+                        AgentCoords[1] = i;
+                    }
+                }
+            }
+
+            return AgentCoords;
+        }
+
+        public void SwapCell(Cell cell1, Cell cell2)
+        {
+            Cell save = new Cell(cell1.CellState);
+
+            cell1.CellState = cell2.CellState;
+            cell2.CellState = save.CellState;
+        }
+
+        
 
         /// <summary>
         /// Displays the grid in console
@@ -52,13 +83,13 @@ namespace Assignment1
                             result += "X";
                             break;
                         case Cell.State.Empty:
-                            result += "O";
+                            result += "O";                           
                             break;
                         case Cell.State.Agent:
                             result += "A";
                             break;
                         case Cell.State.Goal:
-                            result += "G";
+                            result += "G";                           
                             break;
                     }
                     result += " ";

@@ -24,7 +24,7 @@ namespace Assignment1
 
         }
 
-        public void setState(Cell.State state)
+        public void SetState(Cell.State state)
         {
             CellState = state;
         }
